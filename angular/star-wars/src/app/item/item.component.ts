@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { StarWarsService } from 'app/star-wars.service';
 
 @Component({
@@ -6,18 +6,11 @@ import { StarWarsService } from 'app/star-wars.service';
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.css']
 })
-export class ItemComponent implements OnInit {
+export class ItemComponent {
 
   @Input() public character: { name: string, side: string };
 
-  private swService: StarWarsService;
-
-  public constructor(swService: StarWarsService) {
-    this.swService = swService;
-  }
-
-  public ngOnInit(): void {
-  }
+  public constructor(private swService: StarWarsService) {}
 
   public onAssign(side: string): void {
     // this.character.side = side;
