@@ -1,5 +1,6 @@
 import { LogService } from './log.service';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class StarWarsService {
@@ -8,6 +9,8 @@ export class StarWarsService {
     { name: 'Luke Skywalker', side: 'light' },
     { name: 'Darth Vader', side: 'dark' }
   ];
+
+  public charactersChanged = new Subject<void>();
 
   constructor(private logService: LogService) {}
 
@@ -21,6 +24,7 @@ export class StarWarsService {
   public onSideChosen(charInfo: { name: string, side: string }): void {
     const position = this.characters.findIndex(char => char.name === charInfo.name);
     this.characters[position].side = charInfo.side;
+    this.charactersChanged.next();
     this.logService.writeLog(`Changed side of ${charInfo.name} to ${charInfo.side}`);
   }
 
