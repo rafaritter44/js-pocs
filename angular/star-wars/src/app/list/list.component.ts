@@ -20,6 +20,7 @@ export class ListComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute) {}
 
   public ngOnInit(): void {
+    this.swService.fetchCharacters();
     this.activatedRoute
         .params
         .subscribe(params => {
