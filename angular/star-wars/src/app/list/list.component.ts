@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
-import { StarWarsService } from '../star-wars.service';
 import { Subscription } from 'rxjs/Subscription';
+import { Character } from '../character.model';
+import { StarWarsService } from '../star-wars.service';
 
 @Component({
   selector: 'app-list',
@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class ListComponent implements OnInit, OnDestroy {
 
-  public characters: { name: string, side: string }[] = [];
+  public characters: Character[] = [];
   private loadedSide = 'all';
   private subscription: Subscription;
 

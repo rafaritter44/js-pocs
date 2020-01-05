@@ -2,26 +2,37 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { LogService } from './log.service';
+import { Character } from './character.model';
+import 'rxjs/add/operator/map';
+
+interface Response {
+  results: [
+    {
+      name: string
+    }
+  ]
+}
 
 @Injectable()
 export class StarWarsService {
 
-  private characters: { name: string, side: string }[] = [
+  private characters: Character[] = [
     { name: 'Luke Skywalker', side: 'light' },
     { name: 'Darth Vader', side: 'dark' }
   ];
 
   public charactersChanged = new Subject<void>();
 
-  constructor(private httpClient: HttpClient, private logService: LogService) {}
+  public constructor(private httpClient: HttpClient, private logService: LogService) {}
 
   public fetchCharacters() {
     this.httpClient
-        .get('https://swapi.co/api/people')
-        .subscribe((response: Response) => console.log(response));
+        .get<Response>('https://swapi.co/api/people')
+        .map(response => response.results.map((character) => new Character(character.name)))
+        .subscribe(characters => this.characters = characters);
   }
 
-  public getCharacters(chosenList: string): { name: string, side: string }[] {
+  public getCharacters(chosenList: string): Character[] {
     if (chosenList === 'all') {
       return this.characters.slice();
     }
