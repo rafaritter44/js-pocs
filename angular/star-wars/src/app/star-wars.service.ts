@@ -29,7 +29,10 @@ export class StarWarsService {
     this.httpClient
         .get<Response>('https://swapi.co/api/people')
         .map(response => response.results.map((character) => new Character(character.name)))
-        .subscribe(characters => this.characters = characters);
+        .subscribe(characters => {
+          this.characters = characters;
+          this.charactersChanged.next();
+        });
   }
 
   public getCharacters(chosenList: string): Character[] {
