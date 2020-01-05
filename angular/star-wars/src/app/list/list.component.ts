@@ -36,6 +36,10 @@ export class ListComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  public charactersFetched() {
+    return this.swService.charactersFetched;
+  }
+
   private updateCharacters(): void {
     this.characters = this.swService.getCharacters(this.loadedSide);
   }

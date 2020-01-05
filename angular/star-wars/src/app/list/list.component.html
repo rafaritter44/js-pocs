@@ -1,4 +1,8 @@
 <div class="list-group">
-  <app-item *ngFor="let char of characters" [character]="char">
-  </app-item>
+  <div *ngIf="charactersFetched(); else spinner">
+    <app-item *ngFor="let char of characters" [character]="char"></app-item>
+  </div>
+  <ng-template #spinner>
+    <div class="loader"></div>
+  </ng-template>
 </div>

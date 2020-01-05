@@ -22,6 +22,7 @@ export class StarWarsService {
   ];
 
   public charactersChanged = new Subject<void>();
+  public charactersFetched = false;
 
   public constructor(private httpClient: HttpClient, private logService: LogService) {}
 
@@ -32,6 +33,7 @@ export class StarWarsService {
         .subscribe(characters => {
           this.characters = characters;
           this.charactersChanged.next();
+          this.charactersFetched = true;
         });
   }
 
