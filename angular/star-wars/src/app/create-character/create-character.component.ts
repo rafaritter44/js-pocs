@@ -17,14 +17,17 @@ export class CreateCharacterComponent {
 
   public defaultName = 'Obi-Wan';
 
-  constructor(private swService: StarWarsService) {}
+  public constructor(private swService: StarWarsService) {}
 
   public onSubmit(submitttedForm: NgForm): void {
     if (submitttedForm.invalid) {
       return;
     }
     console.log(submitttedForm.value);
-    this.swService.addCharacter(submitttedForm.value.name, submitttedForm.value.side);
+    this.swService.addCharacter({
+      name: submitttedForm.value.name,
+      side: submitttedForm.value.side
+    });
   }
 
 }

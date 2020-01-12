@@ -6,5 +6,4 @@ export class Character {
     this.name = name;
     this.side = side ? side : '';
   }
-
 }

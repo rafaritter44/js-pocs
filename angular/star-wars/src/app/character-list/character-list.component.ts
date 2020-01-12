@@ -5,11 +5,11 @@ import { Character } from '../character.model';
 import { StarWarsService } from '../star-wars.service';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css']
+  selector: 'app-character-list',
+  templateUrl: './character-list.component.html',
+  styleUrls: ['./character-list.component.css']
 })
-export class ListComponent implements OnInit, OnDestroy {
+export class CharacterListComponent implements OnInit, OnDestroy {
 
   public characters: Character[] = [];
   private loadedSide = 'all';
@@ -31,11 +31,11 @@ export class ListComponent implements OnInit, OnDestroy {
         .subscribe(() => this.updateCharacters());
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  public charactersFetched() {
+  public charactersFetched(): boolean {
     return this.swService.charactersFetched;
   }
 
