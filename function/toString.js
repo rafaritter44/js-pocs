@@ -1,7 +1,7 @@
 function fn() {
-    console.log(toString());
+    console.log(toString()); // [object Undefined]
 }
 
 fn();
-console.log(fn.toString());
-console.log(eval('(' + (() => 2 + 2).toString() + ')()'));
+console.log(fn.toString()); // function fn() { ... }
+console.log(eval('(' + (() => 2 + 2).toString() + ')()')); // 4
