@@ -9,8 +9,13 @@ const counter = (() => {
 http.createServer((request, response) => {
   if (request.url.startsWith('/api/people')) {
     if (request.method === 'POST') {
+      const requestBody = [];
       request.on('data', chunk => {
-        const person = JSON.parse(chunk);
+        requestBody.push(chunk);
+      });
+      request.on('end', () => {
+        const parsedRequestBody = Buffer.concat(requestBody).toString();
+        const person = JSON.parse(parsedRequestBody);
         const id = counter();
         person.id = id;
         people.set(id, person);
