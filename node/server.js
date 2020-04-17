@@ -38,7 +38,7 @@ http.createServer((request, response) => {
         }
       } else {
         response.setHeader('Content-Type', 'application/json');
-        response.write(JSON.stringify(Array.from(people.values())));
+        response.write(JSON.stringify(Object.fromEntries(people)));
         response.end();
       }
     } else {
