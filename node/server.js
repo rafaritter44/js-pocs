@@ -20,6 +20,7 @@ http.createServer((request, response) => {
         person.id = id;
         people.set(id, person);
         response.setHeader('Content-Type', 'application/json');
+        response.statusCode = 201;
         response.write(JSON.stringify(person));
         response.end();
       });
